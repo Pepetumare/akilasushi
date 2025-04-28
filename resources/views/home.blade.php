@@ -1,42 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Banner Principal -->
+<div class="bg-dark text-white text-center py-5" style="background: url('{{ asset('images/banner-sushi.jpg') }}') center/cover no-repeat;">
+    <div class="container py-5" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 15px;">
+        <h1 class="display-4 fw-bold">¡Bienvenido a Sushi Akila!</h1>
+        <p class="lead">La mejor experiencia de sushi en Mariquina 🍣</p>
+        <div class="mt-4">
+            <a href="{{ route('menu') }}" class="btn btn-danger btn-lg mx-2">Ver Menú</a>
+            <a href="{{ route('arma') }}" class="btn btn-outline-light btn-lg mx-2">Arma tu Sushi</a>
+        </div>
+    </div>
+</div>
+
+<!-- Contenido adicional debajo -->
 <div class="container py-5">
     <div class="text-center mb-5">
-        <h1 class="fw-bold text-danger">¡Bienvenido a Sushi Akila!</h1>
-        <p class="lead">Disfruta la mejor experiencia japonesa en Mariquina.</p>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="{{ asset('images/home-menu.jpg') }}" class="card-img-top" alt="Menú">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Ver Menú</h5>
-                    <a href="{{ route('menu') }}" class="btn btn-danger">Ver Más</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="{{ asset('images/home-arma.jpg') }}" class="card-img-top" alt="Arma tu Sushi">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Arma tu Sushi</h5>
-                    <a href="{{ route('arma') }}" class="btn btn-danger">Personalizar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <img src="{{ asset('images/home-locales.jpg') }}" class="card-img-top" alt="Locales">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Nuestros Locales</h5>
-                    <a href="{{ route('locales') }}" class="btn btn-danger">Ver Locales</a>
-                </div>
-            </div>
-        </div>
+        <h2 class="fw-bold text-danger">¿Por qué elegirnos?</h2>
+        <p class="lead">Frescura, sabor y pasión en cada rollo de sushi que servimos.</p>
     </div>
 </div>
 @endsection
