@@ -31,7 +31,7 @@
         <div class="tab-content" id="pills-tabContent">
 
             <!-- Base -->
-            <div class="tab-pane fade show active" id="base" role="tabpanel">
+            <div class="tab-pane fade show active" id="base" role="tabpanel" data-aos="fade-up">
                 <div class="mb-4">
                     <h4 class="fw-bold">Elige una Base</h4>
                     @foreach($bases as $base)
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Proteínas -->
-            <div class="tab-pane fade" id="proteinas" role="tabpanel">
+            <div class="tab-pane fade" id="proteinas" role="tabpanel" data-aos="fade-up"> 
                 <div class="mb-4">
                     <h4 class="fw-bold">Elige hasta 2 Proteínas</h4>
                     @foreach($proteinas as $proteina)
@@ -68,7 +68,7 @@
             </div>
 
             <!-- Vegetales -->
-            <div class="tab-pane fade" id="vegetales" role="tabpanel">
+            <div class="tab-pane fade" id="vegetales" role="tabpanel" data-aos="fade-up">
                 <div class="mb-4">
                     <h4 class="fw-bold">Elige hasta 3 Vegetales</h4>
                     @foreach($vegetales as $vegetal)
@@ -87,7 +87,7 @@
             </div>
 
             <!-- Envoltura -->
-            <div class="tab-pane fade" id="envoltura" role="tabpanel">
+            <div class="tab-pane fade" id="envoltura" role="tabpanel" data-aos="fade-up">
                 <div class="mb-4">
                     <h4 class="fw-bold">Elige una Envoltura</h4>
                     @foreach($envolturas as $envoltura)
@@ -101,12 +101,12 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-secondary" type="button" onclick="nextTab('vegetales-tab')">Atrás</button>
-                    <button class="btn btn-primary" type="button" onclick="prepareResumen()">Siguiente</button>
+                    <button class="btn btn-primary" type="button" onclick="prepareResumen()" data-aos="zoom-in">Siguiente</button>
                 </div>
             </div>
 
             <!-- Confirmar -->
-            <div class="tab-pane fade" id="confirmar" role="tabpanel">
+            <div class="tab-pane fade" id="confirmar" role="tabpanel" data-aos="fade-up">
                 <div class="mb-4">
                     <h4 class="fw-bold">Confirma tu Sushi</h4>
                     <ul class="list-group mb-4" id="resumen-lista">
@@ -116,7 +116,7 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <button class="btn btn-secondary" type="button" onclick="nextTab('envoltura-tab')">Atrás</button>
-                    <button type="submit" class="btn btn-success btn-lg">Agregar al Carrito</button>
+                    <button type="submit" class="btn btn-success btn-lg" data-aos="zoom-in-up">Agregar al Carrito</button>
                 </div>
             </div>
 

@@ -17,7 +17,7 @@
 
 <!-- Carrusel de Promociones -->
 <div class="container py-5">
-    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
         <div class="carousel-inner rounded shadow">
 
             <div class="carousel-item active">
@@ -47,12 +47,12 @@
 </div>
 
 <!-- Secciones rápidas -->
-<div class="container pb-5">
+<div class="container pb-5" >
     <div class="row text-center">
 
         <div class="col-md-4 mb-4">
             <div class="card shadow h-100">
-                <div class="card-body">
+                <div class="card-body" data-aos="fade-up">
                     <h5 class="card-title">Menú</h5>
                     <p class="card-text">Explora nuestros rolls, hand rolls, gohan y más.</p>
                     <a href="{{ route('menu') }}" class="btn btn-danger">Ver Menú</a>

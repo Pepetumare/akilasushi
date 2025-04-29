@@ -24,6 +24,28 @@ Route::get('/carrito/checkout', [CartController::class, 'checkout'])->name('cart
 
 Route::get('/arma', [ArmaTuSushiController::class, 'index'])->name('arma');
 Route::post('/arma/agregar', [ArmaTuSushiController::class, 'agregar'])->name('arma.agregar');
+//-----------------------------------------------------------------------------------
+// Área Admin
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+});
+
+// Área Vendedor
+Route::middleware(['auth', 'role:vendedor'])->prefix('vendedor')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('vendedor.dashboard');
+    })->name('vendedor.dashboard');
+});
+
+// Área Usuario Normal
+Route::middleware(['auth', 'role:user'])->prefix('perfil')->group(function () {
+    Route::get('/', function () {
+        return view('user.perfil');
+    })->name('user.perfil');
+});
+
 
 
 

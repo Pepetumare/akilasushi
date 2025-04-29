@@ -10,6 +10,9 @@
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Bootstrap 5 JS Bundle CDN -->
@@ -75,6 +78,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-center">
+
+                    <!-- Links públicos -->
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                             href="{{ route('home') }}">Inicio</a>
@@ -95,12 +100,57 @@
                         <a class="nav-link {{ request()->routeIs('contacto') ? 'active' : '' }}"
                             href="{{ route('contacto') }}">Contacto</a>
                     </li>
-                </ul>
 
-                <a href="#" class="btn btn-danger ms-3">
-                    <i class="bi bi-cart-fill"></i> Carrito
-                </a>
+                    <!-- Autenticación -->
+                    @auth
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-success fw-bold" href="#" id="navbarUserDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn"
+                                aria-labelledby="navbarUserDropdown">
+                                @if (Auth::user()->role === 'admin')
+                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">Panel Admin</a></li>
+                                @elseif(Auth::user()->role === 'vendedor')
+                                    <li><a class="dropdown-item" href="{{ route('vendedor.dashboard') }}">Panel
+                                            Vendedor</a></li>
+                                @else
+                                    <li><a class="dropdown-item" href="{{ route('user.perfil') }}">Mi Perfil</a></li>
+                                @endif
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item text-danger">Cerrar sesión</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @else
+                        <!-- Usuario no autenticado -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
+                        </li>
+                    @endauth
+
+
+                    <!-- Carrito -->
+                    <li class="nav-item">
+                        <a href="{{ route('cart.index') }}" class="btn btn-danger ms-2">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+                    </li>
+                </ul>
             </div>
+
+
         </div>
     </nav>
 
