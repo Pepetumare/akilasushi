@@ -59,6 +59,17 @@
         .navbar-toggler {
             transition: all 0.3s ease;
         }
+
+        .carousel-inner {
+            height: 400px;
+            /* Ajusta esta altura según tus necesidades */
+        }
+
+        .carousel-item img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -194,8 +205,11 @@
             }
         </script>
     @endif
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+    </script>
     @stack('scripts')
+
 
 </body>
 

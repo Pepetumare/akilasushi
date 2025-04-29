@@ -8,10 +8,14 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ArmaTuSushiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
-Route::get('/arma', [ProductoController::class, 'arma'])->name('arma');
 Route::get('/locales', [HomeController::class, 'locales'])->name('locales');
 Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
+//-----------------------------------------------------------------------------------
+
+Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
+Route::get('/arma', [ProductoController::class, 'arma'])->name('arma');
+Route::get('/producto/{id}', [ProductoController::class, 'detalle'])->name('producto.detalle');
+Route::post('/producto/{id}/agregar', [ProductoController::class, 'agregarPersonalizado'])->name('producto.agregar');
 
 //-----------------------------------------------------------------------------------
 
@@ -45,12 +49,6 @@ Route::middleware(['auth', 'role:user'])->prefix('perfil')->group(function () {
         return view('user.perfil');
     })->name('user.perfil');
 });
-
-
-
-
-
-// Ruta para ver detalle de producto si quieres en futuro
-Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');
+//-----------------------------------------------------------------------------------
 
 require __DIR__.'/auth.php';

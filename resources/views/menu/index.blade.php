@@ -15,7 +15,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $producto->nombre }}</h5>
                     <p class="card-text">${{ number_format($producto->precio, 0, ',', '.') }} CLP</p>
-                    <a href="{{ route('producto.show', $producto->id) }}" class="btn btn-danger">Ver Detalle</a>
+                    <a href="{{ route('producto.detalle', $producto->id) }}" class="btn btn-danger">Ver Detalle</a>
                     <a href="{{ route('cart.add', $producto->id) }}" class="btn btn-danger">Agregar al Carrito</a>
                 </div>
             </div>
