@@ -19,7 +19,8 @@
 
     <style>
         body {
-            padding-top: 80px; /* Espacio para el navbar fijo */
+            padding-top: 80px;
+            /* Espacio para el navbar fijo */
         }
 
         .navbar-brand img {
@@ -46,7 +47,8 @@
         @media (min-width: 992px) {
             .navbar-collapse {
                 display: flex !important;
-                justify-content: flex-end; /* Alineación a la derecha */
+                justify-content: flex-end;
+                /* Alineación a la derecha */
             }
         }
 
@@ -114,6 +116,34 @@
             <p class="small">Desarrollado con 🍣 por José Cornejo.</p>
         </div>
     </footer>
+
+    <!-- Botón flotante Carrito -->
+    <a href="{{ route('cart.index') }}" class="btn btn-danger rounded-circle position-fixed"
+        style="bottom: 30px; right: 30px; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; z-index:999;">
+        <i class="bi bi-cart-fill" style="font-size: 1.5rem;"></i>
+    </a>
+
+
+    @if (session('success'))
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+            <div id="successToast" class="toast align-items-center text-white bg-success border-0 show" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ session('success') }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const toastLiveExample = document.getElementById('successToast')
+            if (toastLiveExample) {
+                new bootstrap.Toast(toastLiveExample).show();
+            }
+        </script>
+    @endif
 
     @stack('scripts')
 

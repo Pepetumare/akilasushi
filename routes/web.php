@@ -4,12 +4,29 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ArmaTuSushiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
 Route::get('/arma', [ProductoController::class, 'arma'])->name('arma');
 Route::get('/locales', [HomeController::class, 'locales'])->name('locales');
 Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
+
+//-----------------------------------------------------------------------------------
+
+// Agrega estas rutas:
+Route::get('/carrito', [CartController::class, 'index'])->name('cart.index');
+Route::get('/carrito/agregar/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/carrito/eliminar/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/carrito/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+//-----------------------------------------------------------------------------------
+
+Route::get('/arma', [ArmaTuSushiController::class, 'index'])->name('arma');
+Route::post('/arma/agregar', [ArmaTuSushiController::class, 'agregar'])->name('arma.agregar');
+
+
+
 
 // Ruta para ver detalle de producto si quieres en futuro
 Route::get('/producto/{id}', [ProductoController::class, 'show'])->name('producto.show');

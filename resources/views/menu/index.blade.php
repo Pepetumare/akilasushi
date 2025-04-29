@@ -11,11 +11,12 @@
         @foreach($productos as $producto)
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
-                <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
+                <img src="{{ asset('carta/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $producto->nombre }}</h5>
                     <p class="card-text">${{ number_format($producto->precio, 0, ',', '.') }} CLP</p>
                     <a href="{{ route('producto.show', $producto->id) }}" class="btn btn-danger">Ver Detalle</a>
+                    <a href="{{ route('cart.add', $producto->id) }}" class="btn btn-danger">Agregar al Carrito</a>
                 </div>
             </div>
         </div>
