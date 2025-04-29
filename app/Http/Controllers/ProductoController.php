@@ -52,7 +52,10 @@ class ProductoController extends Controller
 
         if ($request->has('combo')) {
             foreach ($request->input('combo') as $index => $item) {
-                $descripcion = "Hand Roll " . ($index + 1) . ": Base {$item['base']}, Proteína {$item['proteina']}, Vegetal {$item['vegetal']}, Envoltura {$item['envoltura']}";
+                $base = 'Queso crema' . (isset($item['sin_cebollin']) ? '' : ' y cebollín');
+
+                $descripcion = "Hand Roll " . ($index + 1) . ": Base $base, Proteína {$item['proteina']}, Vegetal {$item['vegetal']}, Envoltura {$item['envoltura']}";
+
                 $items[] = $descripcion;
             }
         }

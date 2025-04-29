@@ -19,13 +19,14 @@
                                     </h5>
 
                                     <div class="mb-2">
-                                        <label class="form-label">Base</label>
-                                        <select name="combo[{{ $i }}][base]" class="form-select" required>
-                                            @foreach ($ingredientes['bases'] as $base)
-                                                <option value="{{ $base->nombre }}">{{ $base->nombre }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label class="form-label fw-bold">Base incluida:</label>
+                                        <p class="mb-1">Queso crema y cebollín</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="combo[{{ $i }}][sin_cebollin]" value="1">
+                                            <label class="form-check-label">Sin cebollín</label>
+                                        </div>
                                     </div>
+                                    
 
                                     <div class="mb-2">
                                         <label class="form-label">Proteína</label>
