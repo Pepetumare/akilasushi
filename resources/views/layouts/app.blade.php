@@ -19,7 +19,7 @@
 
     <style>
         body {
-            padding-top: 80px;
+            padding-top: 80px; /* Espacio para el navbar fijo */
         }
 
         .navbar-brand img {
@@ -42,12 +42,17 @@
             text-decoration: underline;
         }
 
+        /* Asegúrate de que el navbar se muestre correctamente en pantallas grandes */
         @media (min-width: 992px) {
-
-            /* lg breakpoint de Bootstrap */
             .navbar-collapse {
                 display: flex !important;
+                justify-content: flex-end; /* Alineación a la derecha */
             }
+        }
+
+        /* Agregar una pequeña animación al cambiar de tamaño */
+        .navbar-toggler {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -58,7 +63,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo-light-transparent.png') }}" alt="Sushi Akila Logo" height="50">
+                <img src="{{ asset('img/logo/logo-light-transparent.png') }}" alt="Sushi Akila Logo" height="50">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -96,10 +101,6 @@
             </div>
         </div>
     </nav>
-
-
-
-
 
     <!-- Main Content -->
     <main>
