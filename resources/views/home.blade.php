@@ -1,86 +1,56 @@
 @extends('layouts.app')
 
-@section('title', 'Inicio')
+@section('title', 'Inicio - Sushi Akila')
 
 @section('content')
-
-<!-- Banner Principal -->
 <div class="container-fluid p-0">
-    <div class="banner-home d-flex align-items-center justify-content-center text-center text-white" style="background: url('https://images.unsplash.com/photo-1603090240854-4580d56ac41e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover; height: 80vh;">
-        <div class="bg-dark bg-opacity-50 p-4 rounded">
-            <h1 class="display-4 fw-bold">¡Bienvenido a Sushi Akila!</h1>
-            <p class="lead">Siente el sabor japonés más cerca que nunca.</p>
-            <a href="{{ route('menu') }}" class="btn btn-danger btn-lg mt-3">Ver Menú</a>
+
+    {{-- HERO PRINCIPAL --}}
+    <div class="bg-dark text-white text-center py-5" style="background-image: url('https://images.unsplash.com/photo-1553621042-f6e147245754'); background-size: cover; background-position: center;">
+        <div class="bg-black bg-opacity-75 py-5">
+            <h1 class="display-4 fw-bold">¡Sushi con personalidad, hecho a tu manera!</h1>
+            <p class="lead">Descubre los mejores rolls, gohan y combos personalizados</p>
+            <a href="{{ route('menu') }}" class="btn btn-danger btn-lg mt-3">Haz tu pedido</a>
         </div>
     </div>
-</div>
 
-<!-- Carrusel de Promociones -->
-<div class="container py-5">
-    <div id="promoCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
-        <div class="carousel-inner rounded shadow">
-
-            <div class="carousel-item active">
-                <img src="img/banner1.jpg" class="d-block w-100" alt="Promo 1">
-            </div>
-
-            <div class="carousel-item">
-                <img src="img/banner2.png" class="d-block w-100" alt="Promo 2">
-            </div>
-
-            <div class="carousel-item">
-                <img src="img/banner3.jpg" class="d-block w-100" alt="Promo 3">
-            </div>
-
+    {{-- SECCIÓN DE PROMOCIONES DESTACADAS --}}
+    <div class="container py-5">
+        <h2 class="fw-bold text-center mb-4">Promociones destacadas</h2>
+        <div class="row g-4">
+            @foreach($promociones ?? [] as $promo)
+                <div class="col-md-4">
+                    <div class="card h-100 shadow">
+                        <img src="{{ $promo->imagen ?? 'https://via.placeholder.com/600x400' }}" class="card-img-top" alt="{{ $promo->nombre }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $promo->nombre }}</h5>
+                            <p class="card-text">${{ number_format($promo->precio, 0, ',', '.') }}</p>
+                            <a href="{{ route('producto.detalle', $promo->id) }}" class="btn btn-outline-danger">Ver detalle</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Anterior</span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Siguiente</span>
-        </button>
     </div>
-</div>
 
-<!-- Secciones rápidas -->
-<div class="container pb-5" >
-    <div class="row text-center">
-
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-body" data-aos="fade-up">
-                    <h5 class="card-title">Menú</h5>
-                    <p class="card-text">Explora nuestros rolls, hand rolls, gohan y más.</p>
-                    <a href="{{ route('menu') }}" class="btn btn-danger">Ver Menú</a>
-                </div>
+    {{-- SECCIÓN DE CATEGORÍAS DESTACADAS --}}
+    <div class="bg-light py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Categorías</h2>
+            <div class="row g-4">
+                @foreach($categorias ?? [] as $categoria)
+                    <div class="col-md-3">
+                        <div class="card text-center shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $categoria->nombre }}</h5>
+                                <a href="{{ route('menu', ['categoria' => $categoria->id]) }}" class="btn btn-sm btn-danger mt-2">Ver productos</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Arma tu Sushi</h5>
-                    <p class="card-text">Personaliza tu experiencia. ¡Elige tus ingredientes favoritos!</p>
-                    <a href="{{ route('arma') }}" class="btn btn-danger">Personalizar</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-4">
-            <div class="card shadow h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Locales</h5>
-                    <p class="card-text">Encuentra el local de Sushi Akila más cercano.</p>
-                    <a href="{{ route('locales') }}" class="btn btn-danger">Ver Locales</a>
-                </div>
-            </div>
-        </div>
-
     </div>
-</div>
 
+</div>
 @endsection
