@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <h4 class="mb-3 fw-bold">Accesos Rápidos</h4>
+    <h4 class="mb-3 fw-bold">Accesos Rápidos!</h4>
     <div class="d-grid gap-3">
         <a href="{{ route('productos.index') }}" class="btn btn-outline-primary btn-lg">Administrar Productos</a>
         <a href="#" class="btn btn-outline-success btn-lg">Ver Pedidos</a>
