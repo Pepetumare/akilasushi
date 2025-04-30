@@ -10,8 +10,8 @@ class RoleMiddleware
 {
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (! in_array($request->user()->role, $roles)) {
-            abort(403);
+        if (! in_array($request->user()?->role, $roles)) {
+            abort(403, 'No autorizado.');
         }
 
         return $next($request);

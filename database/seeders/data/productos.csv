@@ -1,0 +1,42 @@
+nombre,descripcion,precio,categoria,personalizable
+3 Hand Rolls,Hand Rolls personalizables. Base queso crema y cebollín.,10000,Hand Rolls,1
+4 Hand Rolls,Hand Rolls personalizables. Base queso crema y cebollín.,13000,Hand Rolls,1
+Hand Roll Tradicional,Hand Roll tradicional con base queso crema y cebollín.,3500,Hand Rolls,1
+Hand Roll Relleno Doble,Hand Roll doble relleno, base queso crema y cebollín.,4000,Hand Rolls,1
+Hand Roll XL,Hand Roll XL a elección.,4500,Hand Rolls,1
+Kalifornia Roll,Kanika, palta y queso crema.,6000,Rolls Tradicionales,0
+Salmón Palta Roll,Salmón, palta y queso crema.,6500,Rolls Tradicionales,0
+Pollo Palta Roll,Pollo apanado, palta y queso crema.,6000,Rolls Tradicionales,0
+Atún Palta Roll,Atún, palta y queso crema.,6000,Rolls Tradicionales,0
+Ebi Furai Roll,Camarón apanado, palta y queso crema.,6500,Rolls Tradicionales,0
+Philadelphia Roll,Salmón, queso crema, palta, envuelto en sésamo.,7000,Rolls Tradicionales,0
+Dragón Roll,Ebi furai, queso crema, palta, cubierto con palta.,8500,Rolls Tradicionales,0
+New York Roll,Salmón, queso crema, ciboullete, envuelto en ciboullete.,7000,Rolls Tradicionales,0
+Tempura Roll,Tempura de verduras con queso crema.,6500,Rolls Tradicionales,0
+Unagi Roll,Anguila, palta, queso crema, salsa unagi.,9500,Rolls Tradicionales,0
+Solo Para Ti,Combo de 20 piezas a elección.,12000,Combos,1
+Un Gustito,Combo especial de 32 piezas a elección.,18000,Combos,1
+Familiar,Combo de 100 piezas a elección.,35000,Combos,1
+Para la Familia,Combo grande para compartir, 120 piezas.,43000,Combos,1
+Mega Combo 150 Piezas,Gran combo familiar de 150 piezas.,58000,Combos,1
+Gohan Flecha,Gohan de proteína a elección, arroz, cebollín y palta.,6500,Gohan,0
+Gohan Orion,Gohan vegetariano mixto.,6500,Gohan,0
+Akila Burger,Pan de sushi, camarón apanado, queso crema y palta.,7000,Especialidades,0
+Muchupleto,Roll gigante de carnes y queso crema.,9000,Especialidades,0
+Monumento,Roll especial de camarón y queso crema.,8500,Especialidades,0
+Costanera,Roll de mariscos frescos, queso crema y cebollín.,8500,Especialidades,0
+Arrollado Primavera,Roll frito de verduras.,6000,Especialidades,0
+Costillar BBQ,Roll relleno de costillar y salsa BBQ.,9000,Especialidades,0
+Agua Mineral,Agua mineral embotellada.,1500,Bebidas,0
+Bebida Lata,Bebida en lata de 350 ml.,2000,Bebidas,0
+Bebida 1.5 Lt,Bebida de 1.5 litros.,3500,Bebidas,0
+Jugo Natural,Jugo de fruta natural.,2500,Bebidas,0
+Cerveza,Distintas cervezas nacionales.,3000,Bebidas,0
+Cheesecake,Postre de cheesecake tradicional.,3000,Postres,0
+Helado Japonés,Helado de té verde o sésamo.,3500,Postres,0
+Extra Palta,Agregar palta extra.,1000,Extras,0
+Extra Kanikama,Agregar kanikama extra.,1000,Extras,0
+Extra Camarón,Agregar camarón extra.,1500,Extras,0
+Extra Queso Crema,Agregar queso crema extra.,1000,Extras,0
+Extra Salsa Teriyaki,Agregar salsa teriyaki.,500,Extras,0
+Extra Salsa Unagi,Agregar salsa unagi.,500,Extras,0

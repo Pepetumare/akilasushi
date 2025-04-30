@@ -11,7 +11,7 @@
         @foreach($productos as $producto)
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
-                <img src="{{ asset('carta/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
+                <img src="{{ asset('storage/' . $producto->imagen) }}" class="card-img-top" alt="{{ $producto->nombre }}">
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $producto->nombre }}</h5>
                     <p class="card-text">${{ number_format($producto->precio, 0, ',', '.') }} CLP</p>

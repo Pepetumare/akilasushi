@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             ProductoSeeder::class,
             IngredienteSeeder::class,
+            ImportarProductosSeeder::class,
         ]);
 
         User::factory()->create([
