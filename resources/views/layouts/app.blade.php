@@ -11,6 +11,8 @@
     <!-- Bootstrap Icons y Animate -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+
 
     <!-- Vite (Bootstrap + Estilos personalizados) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -163,6 +165,8 @@
 
     {{-- Scripts adicionales --}}
     @stack('scripts')
+
+    
 
 </body>
 

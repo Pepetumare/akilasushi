@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Ingrediente;
 use App\Models\Producto;
 use Illuminate\Http\Request;
@@ -18,11 +19,12 @@ class ProductoController extends Controller
         'personalizable',
         'es_promocion',
     ];
-    
+
     public function index()
     {
-        $productos = Producto::all();
-        return view('menu.index', compact('productos'));
+        $productos = Producto::paginate(12);
+        $categorias = Categoria::all();
+        return view('menu.index', compact('productos', 'categorias'));
     }
 
     public function arma()
@@ -53,6 +55,22 @@ class ProductoController extends Controller
 
         return view('menu.detalle', compact('producto', 'ingredientes', 'esCombo3'));
     }
+
+    public function categoria($slug)
+    {
+        $categoria = Categoria::where('slug', $slug)->firstOrFail();
+        $productos = Producto::where('categoria_id', $categoria->id)->paginate(12);
+        $categorias = Categoria::all();
+        return view('menu.index', compact('productos', 'categorias', 'categoria'));
+    }
+
+    public function modal($id)
+    {
+        $producto = Producto::findOrFail($id);
+        $ingredientes = Ingrediente::where('mostrar', true)->get();
+        return view('partials.modal-producto', compact('producto', 'ingredientes'));
+    }
+
 
     public function agregarPersonalizado(Request $request, $id)
     {

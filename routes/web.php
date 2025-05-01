@@ -16,12 +16,16 @@ use App\Http\Controllers\ArmaTuSushiController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
+Route::get('/menu/{slug}', [ProductoController::class, 'categoria'])->name('menu.categoria');
+
 Route::get('/arma', [ProductoController::class, 'arma'])->name('arma');
 Route::get('/locales', [HomeController::class, 'locales'])->name('locales');
 Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
 
 Route::get('/producto/{id}', [ProductoController::class, 'detalle'])->name('producto.detalle');
 Route::post('/producto/{id}/agregar', [ProductoController::class, 'agregarPersonalizado'])->name('producto.agregar');
+Route::get('/producto/modal/{id}', [ProductoController::class, 'modal'])->name('producto.modal');
+
 
 /*
 |--------------------------------------------------------------------------

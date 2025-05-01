@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('productos', function (Blueprint $table) {
-            $table->boolean('personalizable')->default(false);
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->string('slug')->unique()->after('nombre');
         });
     }
 
     public function down()
     {
-        Schema::table('productos', function (Blueprint $table) {
-            $table->dropColumn('personalizable');
+        Schema::table('categorias', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 };
