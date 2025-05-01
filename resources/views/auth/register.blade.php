@@ -46,7 +46,7 @@
                 <label class="form-label">Confirmar Contraseña</label>
                 <input type="password" name="password_confirmation" class="form-control" required>
             </div>
-
+            <p class="text-muted">Token: {{ csrf_token() }}</p>
             <!-- Botón de registro -->
             <div class="d-grid">
                 <button type="submit" class="btn btn-danger btn-lg">Registrarse</button>
