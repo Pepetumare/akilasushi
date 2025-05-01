@@ -21,21 +21,31 @@ class CartController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $cart = session()->get('cart', []);
-
-        if (isset($cart[$id])) {
-            $cart[$id]['cantidad']++;
+    
+        $ingredientes = $request->input('ingredientes') ? json_decode($request->input('ingredientes'), true) : [];
+        $precioFinal = $request->input('precio_final') ?? $producto->precio;
+    
+        // generar un hash único si es personalizado
+        $hash = md5($id . json_encode($ingredientes) . $precioFinal);
+    
+        if (isset($cart[$hash])) {
+            $cart[$hash]['cantidad']++;
         } else {
-            $cart[$id] = [
+            $cart[$hash] = [
+                "producto_id" => $id,
                 "nombre" => $producto->nombre,
-                "precio" => $producto->precio,
+                "ingredientes" => $ingredientes,
+                "precio" => (int) $precioFinal,
                 "cantidad" => 1,
             ];
         }
-
+    
         session()->put('cart', $cart);
-
+    
         return redirect()->back()->with('success', 'Producto agregado al carrito');
     }
+    
+
 
     public function remove($id)
     {

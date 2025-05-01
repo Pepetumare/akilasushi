@@ -15,8 +15,8 @@ use App\Http\Controllers\ArmaTuSushiController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
 Route::get('/menu/{slug}', [ProductoController::class, 'categoria'])->name('menu.categoria');
+Route::get('/menu', [ProductoController::class, 'index'])->name('menu');
 
 Route::get('/arma', [ProductoController::class, 'arma'])->name('arma');
 Route::get('/locales', [HomeController::class, 'locales'])->name('locales');
