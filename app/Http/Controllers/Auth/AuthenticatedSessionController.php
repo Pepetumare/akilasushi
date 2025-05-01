@@ -25,12 +25,11 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+
         $request->session()->regenerate();
-    
-        // Obtener el usuario autenticado
-        $user = $request->user();
-    
-        // Redirigir según el rol
+
+        $user = Auth::user();
+
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->role === 'vendedor') {
@@ -39,7 +38,6 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('user.perfil');
         }
     }
-    
 
     /**
      * Destroy an authenticated session.

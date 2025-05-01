@@ -45,7 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Nuevo código personalizado
         $user = Auth::user();
 
         if ($user->role === 'admin') {
