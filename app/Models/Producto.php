@@ -12,8 +12,10 @@ class Producto extends Model
         'precio',
         'categoria_id',
         'imagen',
-        'opciones', // si usas opciones json para handrolls
+        'personalizable',
+        'es_promocion', // 👈 ¡ESTO ES OBLIGATORIO!
     ];
+    
 
     public function categoria()
     {

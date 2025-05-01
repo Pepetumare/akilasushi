@@ -70,6 +70,15 @@
                             <input type="file" name="imagen" class="form-control" accept="image/*">
                         </div>
 
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" name="es_promocion" id="es_promocion"
+                                {{ old('es_promocion', $producto->es_promocion ?? false) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="es_promocion" name="es_promocion">
+                                ¿Mostrar este producto como promoción destacada?
+                            </label>
+                        </div>
+                        
+
                         <!-- Botones -->
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('productos.index') }}" class="btn btn-secondary">Cancelar</a>

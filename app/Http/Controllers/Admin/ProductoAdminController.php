@@ -31,13 +31,16 @@ class ProductoAdminController extends Controller
             'precio' => 'required|numeric|min:0',
             'categoria_id' => 'nullable|exists:categorias,id',
             'imagen' => 'nullable|image|max:2048',
+            'es_promocion' => 'nullable|in:on,1,true,false,0',
         ]);
+
+        $data['es_promocion'] = $request->has('es_promocion');
+
 
         if ($request->hasFile('imagen')) {
             $nombreOriginal = $request->file('imagen')->getClientOriginalName();
             $fecha = now()->format('Ymd_His'); // Ejemplo: 20240501_124533
             $nombreFinal = $fecha . '_' . Str::slug(pathinfo($nombreOriginal, PATHINFO_FILENAME)) . '.' . $request->file('imagen')->extension();
-
             $data['imagen'] = $request->file('imagen')->storeAs('productos', $nombreFinal, 'public');
         }
 
@@ -60,7 +63,10 @@ class ProductoAdminController extends Controller
             'precio' => 'required|numeric|min:0',
             'categoria_id' => 'nullable|exists:categorias,id',
             'imagen' => 'nullable|image|max:2048',
+            'es_promocion' => 'nullable|in:on,1,true,false,0',
         ]);
+
+        $data['es_promocion'] = $request->has('es_promocion');
 
         if ($request->hasFile('imagen')) {
             // Borrar imagen anterior si existe

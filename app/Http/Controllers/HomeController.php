@@ -10,10 +10,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $promociones = Producto::where('categoria_id', 3)->limit(3)->get(); // Combos
+        $promociones = Producto::where('es_promocion', true)->limit(3)->get();
         $categorias = Categoria::all();
 
-        return view('home');
+        return view('home', compact('promociones', 'categorias'));
     }
 
     public function locales()
