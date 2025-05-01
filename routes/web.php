@@ -75,6 +75,10 @@ Route::middleware(['auth', 'role:user'])->prefix('perfil')->group(function () {
     })->name('user.perfil');
 });
 
+
+Route::get('/debug-token', function () {
+    return csrf_token();
+});
 /*
 |--------------------------------------------------------------------------
 | AUTENTICACIÓN (BREEZE)
