@@ -17,49 +17,53 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-bordered align-middle text-center shadow">
+            <table class="table table-bordered text-center align-middle">
                 <thead class="table-dark">
                     <tr>
-                        <th>Imagen</th>
+                        <th>ID</th>
                         <th>Nombre</th>
-                        <th>Precio</th>
                         <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>¿Promoción?</th>
+                        <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($productos as $producto)
-                        <tr>
-                            <td style="width: 100px">
-                                @if ($producto->imagen)
-                                    <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen del Producto"
-                                        class="img-fluid rounded" style="max-height: 150px;">
-                                @else
-                                    <small class="text-muted">Sin imagen</small>
-                                @endif
-                            </td>
-                            <td>{{ $producto->nombre }}</td>
-                            <td>${{ number_format($producto->precio, 0, ',', '.') }}</td>
-                            <td>{{ $producto->categoria->nombre ?? '-' }}</td>
-                            <td>
-                                <a href="{{ route('productos.edit', $producto->id) }}"
-                                    class="btn btn-warning btn-sm">Editar</a>
-                                <form action="{{ route('productos.destroy', $producto->id) }}" method="POST"
-                                    class="d-inline-block"
-                                    onsubmit="return confirm('¿Estás seguro de eliminar este producto?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5">No hay productos disponibles.</td>
-                        </tr>
-                    @endforelse
+                    @foreach($productos as $producto)
+                    <tr>
+                        <td>{{ $producto->id }}</td>
+                        <td>{{ $producto->nombre }}</td>
+                        <td>{{ $producto->categoria->nombre ?? 'Sin categoría' }}</td>
+                        <td>${{ number_format($producto->precio, 0, ',', '.') }}</td>
+                        <td>
+                            @if($producto->es_promocion)
+                                <span class="badge bg-success">Sí</span>
+                            @else
+                                <span class="badge bg-secondary">No</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($producto->imagen)
+                                <img src="{{ asset('storage/' . $producto->imagen) }}" alt="Imagen del producto" style="height: 60px;">
+                            @else
+                                <span class="text-muted">Sin imagen</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-sm btn-warning">Editar</a>
+                            <form action="{{ route('productos.destroy', $producto->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('¿Estás seguro de eliminar este producto?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
+            
         </div>
     </div>
 @endsection

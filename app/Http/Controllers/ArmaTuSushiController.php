@@ -19,44 +19,73 @@ class ArmaTuSushiController extends Controller
 
     public function agregar(Request $request)
     {
-        // Validaciones
+        // Validación básica
         $request->validate([
             'base' => 'required|exists:ingredientes,id',
-            'proteinas' => 'nullable|array|max:2',  // máximo 2 proteínas
-            'proteinas.*' => 'exists:ingredientes,id',
-            'vegetales' => 'nullable|array|max:3',  // máximo 3 vegetales
-            'vegetales.*' => 'exists:ingredientes,id',
+            'ingredientes' => 'required|array|min:1|max:3',
+            'ingredientes.*' => 'exists:ingredientes,id',
             'envoltura' => 'required|exists:ingredientes,id',
-        ], [
-            'proteinas.max' => 'Solo puedes seleccionar hasta 2 proteínas.',
-            'vegetales.max' => 'Solo puedes seleccionar hasta 3 vegetales.',
         ]);
 
-        // Lógica de armado
+        // Obtener ingredientes desde BD
         $base = Ingrediente::find($request->base);
-        $proteinas = Ingrediente::whereIn('id', $request->proteinas ?? [])->get();
-        $vegetales = Ingrediente::whereIn('id', $request->vegetales ?? [])->get();
         $envoltura = Ingrediente::find($request->envoltura);
+        $ingredientesSeleccionados = Ingrediente::whereIn('id', $request->ingredientes)->get();
 
-        $descripcion = "Base: {$base->nombre}, Envoltura: {$envoltura->nombre}";
-        if ($proteinas->count()) {
-            $descripcion .= ", Proteínas: " . $proteinas->pluck('nombre')->join(', ');
+        // Reglas de negocio del cliente
+        $ingredientes = [];
+        $precioTotal = $base->precio + $envoltura->precio;
+        $contador = [];
+
+        foreach ($ingredientesSeleccionados as $ing) {
+            $contador[$ing->nombre] = ($contador[$ing->nombre] ?? 0) + 1;
+
+            if ($ing->nombre === 'Salmón' && $contador[$ing->nombre] > 1) {
+                return back()->with('error', 'No puedes repetir salmón.');
+            }
+
+            $precioExtra = 0;
+            $repeticiones = $contador[$ing->nombre];
+
+            // Aplica precio extra por repetición
+            if ($repeticiones > 1 && $ing->nombre !== 'Salmón') {
+                $precioExtra += ($repeticiones - 1) * 1000;
+            }
+
+            // Aplica cargo por tipo especial
+            if (str_contains(strtolower($ing->nombre), 'apanado')) {
+                $precioExtra += 1500;
+            } elseif (strtolower($ing->nombre) === 'carne') {
+                $precioExtra += 2000;
+            }
+
+            $precioFinal = $ing->precio + $precioExtra;
+            $precioTotal += $precioFinal;
+
+            $ingredientes[] = [
+                'id' => $ing->id,
+                'nombre' => $ing->nombre,
+                'precio_unitario' => $ing->precio,
+                'repeticiones' => $repeticiones,
+                'precio_final' => $precioFinal
+            ];
         }
-        if ($vegetales->count()) {
-            $descripcion .= ", Vegetales: " . $vegetales->pluck('nombre')->join(', ');
-        }
 
-        $precio = $base->precio + $envoltura->precio + $proteinas->sum('precio') + $vegetales->sum('precio');
+        // Armar descripción
+        $descripcion = "Base: {$base->nombre}, Envoltura: {$envoltura->nombre}, Ingredientes: " .
+            collect($ingredientes)->pluck('nombre')->join(', ');
 
+        // Guardar en carrito
         $cart = session()->get('cart', []);
         $cart[] = [
-            "nombre" => "Sushi Personalizado",
+            "nombre" => "Hand Roll Personalizado",
             "descripcion" => $descripcion,
-            "precio" => $precio,
+            "ingredientes" => $ingredientes,
+            "precio" => $precioTotal,
             "cantidad" => 1,
         ];
         session()->put('cart', $cart);
 
-        return redirect()->route('cart.index')->with('success', '¡Sushi personalizado agregado al carrito!');
+        return redirect()->route('cart.index')->with('success', '¡Hand roll personalizado agregado al carrito!');
     }
 }
