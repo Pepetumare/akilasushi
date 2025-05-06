@@ -70,7 +70,7 @@
 
             {{-- INGREDIENTES CLICKEABLES --}}
             <div class="mb-3">
-                <label class="form-label fw-bold">Ingredientes</label>
+                <label class="form-label fw-bold">Selecciona tus ingredientes (máximo 3)</label>
                 <div id="lista-ingredientes">
                     @foreach ($ingredientes as $ing)
                         @if ($ing->mostrar)
@@ -85,6 +85,12 @@
                     @endforeach
                 </div>
             </div>
+            <div class="text-end mb-3">
+                <button type="button" id="resetIngredientes" class="btn btn-outline-secondary btn-sm">
+                    Quitar todos los ingredientes
+                </button>
+            </div>
+            
 
             <input type="hidden" name="ingredientes" id="ingredientesInput">
             <input type="hidden" name="precio_base" id="precioBaseInput" value="{{ $producto->precio }}">

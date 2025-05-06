@@ -117,43 +117,24 @@
     </div>
 
     @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const ingredientesInput = document.getElementById('ingredientesInput');
-            const lista = document.getElementById('lista-ingredientes');
-            const precioBase = parseInt(document.getElementById('precioBaseInput').value);
-            const precioDisplay = document.getElementById('precio-final');
-            const precioFinalInput = document.getElementById('precioFinalInput');
-    
-            const seleccionados = {}; // id => cantidad
-    
-            lista.querySelectorAll('.chip-ingrediente').forEach(chip => {
-                chip.addEventListener('click', function () {
-                    const id = chip.dataset.id;
-                    const precio = parseInt(chip.dataset.precio);
-                    const repite = chip.dataset.repite === '1';
-    
-                    // control de conteo
-                    if (!seleccionados[id]) seleccionados[id] = 0;
-    
-                    // regla: si no se repite y ya fue seleccionado, no se puede agregar más
-                    if (!repite && seleccionados[id] >= 1) return;
-    
-                    seleccionados[id] += 1;
-    
-                    chip.classList.add('seleccionado');
-                    const counter = chip.querySelector('.counter');
-                    counter.textContent = 'x' + seleccionados[id];
-                    counter.classList.remove('d-none');
-    
-                    // calcular total
+        <script>
+            function inicializarChipsIngredientes() {
+                const ingredientesInput = document.getElementById('ingredientesInput');
+                const lista = document.getElementById('lista-ingredientes');
+                const precioBase = parseInt(document.getElementById('precioBaseInput').value);
+                const precioDisplay = document.getElementById('precio-final');
+                const precioFinalInput = document.getElementById('precioFinalInput');
+
+                const seleccionados = {}; // id => cantidad
+
+                const calcularTotal = () => {
                     let adicional = 0;
                     Object.keys(seleccionados).forEach(key => {
                         const chipEl = lista.querySelector(`[data-id='${key}']`);
                         const precioChip = parseInt(chipEl.dataset.precio);
                         const cantidad = seleccionados[key];
                         const repiteChip = chipEl.dataset.repite === '1';
-    
+
                         if (!repiteChip) {
                             adicional += precioChip;
                         } else if (cantidad <= 2) {
@@ -162,17 +143,72 @@
                             adicional += (precioChip * 2) + ((cantidad - 2) * 1000);
                         }
                     });
-    
+
                     const total = precioBase + adicional;
                     precioDisplay.textContent = '$' + total.toLocaleString('es-CL');
                     precioFinalInput.value = total;
-    
-                    // guardar lista en hidden input
                     ingredientesInput.value = JSON.stringify(seleccionados);
+                };
+
+                lista.querySelectorAll('.chip-ingrediente').forEach(chip => {
+                    chip.addEventListener('click', function() {
+                        const id = chip.dataset.id;
+                        const precio = parseInt(chip.dataset.precio);
+                        const repite = chip.dataset.repite === '1';
+
+                        const totalSeleccionados = Object.values(seleccionados).reduce((a, b) => a + b, 0);
+
+                        // Deseleccionar si ya estaba
+                        if (seleccionados[id]) {
+                            // Reducir o eliminar
+                            seleccionados[id]--;
+                            if (seleccionados[id] <= 0) {
+                                delete seleccionados[id];
+                                chip.classList.remove('seleccionado');
+                                chip.querySelector('.counter').classList.add('d-none');
+                            } else {
+                                chip.querySelector('.counter').textContent = 'x' + seleccionados[id];
+                            }
+
+                            calcularTotal();
+                            return;
+                        }
+
+                        // No se repite y ya existe: no hacer nada
+                        if (!repite && seleccionados[id] >= 1) return;
+
+                        // Límite global de 3
+                        if (totalSeleccionados >= 3) return;
+
+                        // Marcar ingrediente
+                        seleccionados[id] = 1;
+                        chip.classList.add('seleccionado');
+                        const counter = chip.querySelector('.counter');
+                        counter.textContent = 'x1';
+                        counter.classList.remove('d-none');
+
+                        calcularTotal();
+                    });
                 });
-            });
-        });
-    </script>
+
+                // RESET
+                const resetBtn = document.getElementById('resetIngredientes');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        Object.keys(seleccionados).forEach(id => {
+                            const chip = lista.querySelector(`[data-id='${id}']`);
+                            chip.classList.remove('seleccionado');
+                            chip.querySelector('.counter').classList.add('d-none');
+                        });
+                        for (let key in seleccionados) delete seleccionados[key];
+                        calcularTotal();
+                    });
+                }
+            }
+        </script>
+
+
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const modal = document.getElementById('productoModal');
@@ -198,6 +234,7 @@
                             contenido.innerHTML = html;
                             titulo.textContent = document.getElementById('modal-producto-titulo')
                                 ?.textContent || 'Detalle del producto';
+                            inicializarChipsIngredientes();
                         })
                         .catch(() => {
                             contenido.innerHTML =
