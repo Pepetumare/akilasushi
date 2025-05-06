@@ -21,7 +21,7 @@
             @foreach($promociones ?? [] as $promo)
                 <div class="col-md-4">
                     <div class="card h-100 shadow">
-                        <img src="{{ $promo->imagen ?? 'https://via.placeholder.com/600x400' }}" class="card-img-top" alt="{{ $promo->nombre }}">
+                        <img src="{{ $promo->imagen ? asset('storage/' . $promo->imagen) : 'https://via.placeholder.com/600x400' }}" class="card-img-top" alt="{{ $promo->nombre }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{ $promo->nombre }}</h5>
                             <p class="card-text">${{ number_format($promo->precio, 0, ',', '.') }}</p>
