@@ -17,20 +17,32 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
+    
     public function add(Request $request, $id)
     {
         $producto = Producto::findOrFail($id);
         $cart = session()->get('cart', []);
-    
-        $ingredientes = $request->input('ingredientes') ? json_decode($request->input('ingredientes'), true) : [];
-        $precioFinal = $request->input('precio_final') ?? $producto->precio;
-    
-        // generar un hash único si es personalizado
-        $hash = md5($id . json_encode($ingredientes) . $precioFinal);
-    
-        if (isset($cart[$hash])) {
-            $cart[$hash]['cantidad']++;
+
+        // Obtener ingredientes y precio actualizado del request
+        $ingredientes = $request->input('ingredientes', []);
+        $precio_final = $request->input('precio_final', $producto->precio);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['cantidad']++;
         } else {
+            $cart[$id] = [
+                "nombre" => $producto->nombre,
+                "precio" => $precio_final,
+                "cantidad" => 1,
+                "ingredientes" => $ingredientes,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Producto agregado al carrito');
+    }
+else {
             $cart[$hash] = [
                 "producto_id" => $id,
                 "nombre" => $producto->nombre,

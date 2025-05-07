@@ -100,4 +100,33 @@ class ProductoController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Producto personalizado agregado al carrito');
     }
+
+    public function menu($filter = null)
+    {
+        $query = Producto::query();
+
+        // Filtros
+        switch ($filter) {
+            case 'price_asc':
+                $query->orderBy('precio', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('precio', 'desc');
+                break;
+            case 'name_asc':
+                $query->orderBy('nombre', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('nombre', 'desc');
+                break;
+            default:
+                $query->orderBy('nombre', 'asc'); // Orden por defecto
+                break;
+        }
+
+        $productos = $query->paginate(12);
+        $categorias = Categoria::all();
+
+        return view('menu.index', compact('productos', 'categorias', 'filter'));
+    }
 }

@@ -16,10 +16,13 @@
             <a href="{{ route('productos.create') }}" class="btn btn-primary">➕ Agregar Producto</a>
         </div> --}}
 
-        <!-- Botón para abrir el modal -->
-        <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearProductoModal">
-            <i class="bi bi-plus-circle"></i> Crear Producto
-        </button>
+
+        <div class="container">
+            <!-- Botón para abrir el modal -->
+            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#crearProductoModal">
+                <i class="bi bi-plus-circle fixed-top"></i> Crear Producto
+            </button>
+        </div>
 
 
         <div class="table-responsive">
