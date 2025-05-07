@@ -15,7 +15,7 @@ class Producto extends Model
         'personalizable',
         'es_promocion', // 👈 ¡ESTO ES OBLIGATORIO!
     ];
-    
+
     public function ingredientes()
     {
         return $this->belongsToMany(Ingrediente::class, 'producto_ingrediente');
@@ -24,5 +24,10 @@ class Producto extends Model
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function getImagenUrlAttribute()
+    {
+        return $this->imagen ? asset('storage/' . $this->imagen) : 'https://via.placeholder.com/600x400';
     }
 }

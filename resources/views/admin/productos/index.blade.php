@@ -116,7 +116,15 @@
                                         @endforeach
                                     </select>
                                 </div>
-
+                                <!-- Campo de imagen -->
+                                <div class="mb-3">
+                                    <label for="imagen" class="form-label">Imagen del Producto</label>
+                                    <input type="file" name="imagen" class="form-control" id="imagen">
+                                    @if ($producto->imagen)
+                                        <img src="{{ $producto->imagen_url }}" alt="Imagen actual"
+                                            class="img-thumbnail mt-2" style="max-height: 150px;">
+                                    @endif
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label">Ingredientes</label>
                                     <div class="border rounded p-2" style="max-height: 200px; overflow-y:auto;">
@@ -176,7 +184,7 @@
                     boton.addEventListener('click', function() {
                         // Rellenar campos
                         form.action =
-                        `/admin/productos/${this.dataset.id}`; // Ajusta si usas named routes
+                            `/admin/productos/${this.dataset.id}`; // Ajusta si usas named routes
                         form.querySelector('[name="nombre"]').value = this.dataset.nombre;
                         form.querySelector('[name="descripcion"]').value = this.dataset.descripcion;
                         form.querySelector('[name="precio"]').value = this.dataset.precio;
