@@ -1,3 +1,4 @@
+
 <div id="modal-producto-titulo" class="d-none">{{ $producto->nombre }}</div>
 
 <style>
@@ -58,19 +59,17 @@
             {{-- BASE --}}
             <div class="mb-3">
                 <label class="form-label fw-bold">Base</label><br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="sin_queso_crema" value="1" id="sinQuesoCrema">
-                    <label class="form-check-label" for="sinQuesoCrema">Sin Queso Crema</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="sin_cebollin" value="1" id="sinCebollin">
-                    <label class="form-check-label" for="sinCebollin">Sin Cebollín</label>
-                </div>
+                @foreach ($bases as $base)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="base[]" value="{{ $base->id }}" id="base{{ $base->id }}">
+                        <label class="form-check-label" for="base{{ $base->id }}">{{ $base->nombre }}</label>
+                    </div>
+                @endforeach
             </div>
 
             {{-- INGREDIENTES CLICKEABLES --}}
             <div class="mb-3">
-                <label class="form-label fw-bold">Selecciona tus ingredientes (máximo 3)</label>
+                <label class="form-label fw-bold">Ingredientes</label>
                 <div id="lista-ingredientes">
                     @foreach ($ingredientes as $ing)
                         @if ($ing->mostrar)
@@ -85,12 +84,6 @@
                     @endforeach
                 </div>
             </div>
-            <div class="text-end mb-3">
-                <button type="button" id="resetIngredientes" class="btn btn-outline-secondary btn-sm">
-                    Quitar todos los ingredientes
-                </button>
-            </div>
-            
 
             <input type="hidden" name="ingredientes" id="ingredientesInput">
             <input type="hidden" name="precio_base" id="precioBaseInput" value="{{ $producto->precio }}">
@@ -110,5 +103,3 @@
         @endif
     </div>
 </div>
-
-
