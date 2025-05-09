@@ -40,6 +40,10 @@
         right: -8px;
         border: 1px solid #dc3545;
     }
+
+    .btn-reset {
+        margin-top: 10px;
+    }
 </style>
 
 <div class="row">
@@ -56,6 +60,19 @@
         <form method="POST" action="{{ route('producto.agregar', $producto->id) }}">
             @csrf
 
+            {{-- Quitar Queso Crema y Cebollín --}}
+            <div class="mb-3">
+                <label class="form-label fw-bold">Opciones</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="sin_queso_crema" id="sinQuesoCrema">
+                    <label class="form-check-label" for="sinQuesoCrema">Sin Queso Crema</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="sin_cebollin" id="sinCebollin">
+                    <label class="form-check-label" for="sinCebollin">Sin Cebollín</label>
+                </div>
+            </div>
+
             {{-- INGREDIENTES CLICKEABLES --}}
             <div class="mb-3">
                 <label class="form-label fw-bold">Ingredientes</label>
@@ -70,6 +87,7 @@
                         </div>
                     @endforeach
                 </div>
+                <button type="button" class="btn btn-outline-secondary btn-sm btn-reset" id="resetIngredientes">Quitar Todo</button>
             </div>
 
             <input type="hidden" name="ingredientes" id="ingredientesInput">
