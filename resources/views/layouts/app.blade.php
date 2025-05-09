@@ -74,8 +74,6 @@
                             href="{{ route('home') }}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('menu') ? 'active' : '' }}"
                             href="{{ route('menu') }}">Menú</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('arma') ? 'active' : '' }}"
-                            href="{{ route('arma') }}">Arma tu Sushi</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('locales') ? 'active' : '' }}"
                             href="{{ route('locales') }}">Locales</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('contacto') ? 'active' : '' }}"

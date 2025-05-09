@@ -56,23 +56,11 @@
         <form method="POST" action="{{ route('producto.agregar', $producto->id) }}">
             @csrf
 
-            {{-- BASE --}}
-            <div class="mb-3">
-                <label class="form-label fw-bold">Base</label><br>
-                @foreach ($bases as $base)
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="base[]" value="{{ $base->id }}" id="base{{ $base->id }}">
-                        <label class="form-check-label" for="base{{ $base->id }}">{{ $base->nombre }}</label>
-                    </div>
-                @endforeach
-            </div>
-
             {{-- INGREDIENTES CLICKEABLES --}}
             <div class="mb-3">
                 <label class="form-label fw-bold">Ingredientes</label>
                 <div id="lista-ingredientes">
                     @foreach ($ingredientes as $ing)
-                        @if ($ing->mostrar)
                         <div class="chip-ingrediente" data-id="{{ $ing->id }}"
                              data-nombre="{{ $ing->nombre }}"
                              data-precio="{{ $ing->precio_base }}"
@@ -80,7 +68,6 @@
                             {{ $ing->nombre }}
                             <span class="counter d-none">x1</span>
                         </div>
-                        @endif
                     @endforeach
                 </div>
             </div>
@@ -93,13 +80,6 @@
                 <i class="bi bi-cart-plus"></i> Agregar al carrito
             </button>
         </form>
-        @else
-            <form method="POST" action="{{ route('producto.agregar', $producto->id) }}">
-                @csrf
-                <button type="submit" class="btn btn-danger w-100 mt-3">
-                    <i class="bi bi-cart-plus"></i> Agregar al carrito
-                </button>
-            </form>
         @endif
     </div>
 </div>
